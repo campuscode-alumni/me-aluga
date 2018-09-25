@@ -30,6 +30,6 @@ class PropertiesController < ApplicationController
                                      :room_quantity, :accessibility,
                                      :allow_pets, :allow_smokers,
                                      :maximum_guests, :minimum_rent,
-                                     :maximum_rent, :daily_rate)
+                                     :maximum_rent, :daily_rate, :image)
   end
 end

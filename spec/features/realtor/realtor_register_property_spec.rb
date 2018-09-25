@@ -21,8 +21,10 @@ feature 'Realtor register Property' do
     fill_in 'Mínimo de diárias', with: 1
     fill_in 'Máximo de diárias', with: 20
     fill_in 'Valor da diária', with: '500.50'
+    attach_file('Enviar foto', Rails.root.join('spec', 'support', 'fixtures', 'imovel.jpg'))
     click_on 'Cadastrar'
 
+    
     expect(page).to have_css('p', text: 'Imóvel cadastrado com sucesso')
     expect(page).to have_css('h1', text: 'Lindo apartamento 100m da praia')
     expect(page).to have_css('p', text: 'Um apartamento excelente para férias')
@@ -38,6 +40,7 @@ feature 'Realtor register Property' do
     expect(page).to have_css('li', text: '1')
     expect(page).to have_css('li', text: '20')
     expect(page).to have_css('li', text: 'R$ 500.5')
+    expect(page).to have_xpath("//img[contains(@src, 'imovel.jpg')]")
   end
 
   scenario 'and leave blank fields' do
@@ -56,4 +59,6 @@ feature 'Realtor register Property' do
     expect(page).to have_content('Maximum rent não pode ficar em branco')
     expect(page).to have_content('Daily rate não pode ficar em branco')
   end
+
+  
 end
