@@ -1,7 +1,9 @@
 class RegionsController < ApplicationController
   before_action :set_region, only: [:show]
 
-  def show; end
+  def show 
+    @regions = Region.all
+  end
 
   def new
     @region = Region.new

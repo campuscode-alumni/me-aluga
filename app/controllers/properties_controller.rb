@@ -3,6 +3,12 @@ class PropertiesController < ApplicationController
 
   def show; end
 
+  def index
+    @regions = Region.all
+
+    #@property = Property.find()
+  end 
+
   def new
     @property = Property.new
   end

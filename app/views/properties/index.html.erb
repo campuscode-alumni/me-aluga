@@ -1,3 +1,24 @@
 Bem-vindo ao aluga temporada!
 
 <%= link_to 'Cadastrar Imóvel', new_property_path %>
+
+<% if @regions.empty? %>
+  <p>Ainda não há regiões cadastradas</p>
+<% else %>
+  <% @regions.each do |region| %>
+    <h1><%= region.name %></h1>
+    <div class="region<%= region.id %>">
+      <% if region.properties.empty? %>
+      <p>Ainda não há imóveis para esta região</p>
+      <% else %>
+        <% region.properties.each do |property| %>      
+          <h3><%= property.title %></h3>
+          <p><%= property.description %></p>
+          <p><%= property.property_type.name %></p>
+          <p><%= property.room_quantity %></p>
+          <p><%= property.daily_rate %></p>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
