@@ -15,6 +15,7 @@ class PropertiesController < ApplicationController
 
   def create
     @property = Property.new(property_params)
+ 
     if @property.save
       flash[:success] = 'Imóvel cadastrado com sucesso'
       redirect_to @property
@@ -36,6 +37,6 @@ class PropertiesController < ApplicationController
                                      :room_quantity, :accessibility,
                                      :allow_pets, :allow_smokers,
                                      :maximum_guests, :minimum_rent,
-                                     :maximum_rent, :daily_rate)
+                                     :maximum_rent, :daily_rate, :image)
   end
 end

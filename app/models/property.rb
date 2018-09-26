@@ -1,6 +1,7 @@
 class Property < ApplicationRecord
   belongs_to :property_type
   belongs_to :region
+  has_one_attached :image
 
   validates :title, :room_quantity, :maximum_guests, :minimum_rent,
             :maximum_rent, :daily_rate,
