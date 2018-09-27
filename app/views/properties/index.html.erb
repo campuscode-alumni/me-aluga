@@ -11,7 +11,12 @@ Bem-vindo ao aluga temporada!
       <% if region.properties.empty? %>
       <p>Ainda não há imóveis para esta região</p>
       <% else %>
-        <% region.properties.each do |property| %>      
+        <% region.properties.each do |property| %>
+          <% if property.image.attached? %>
+            <li><%= image_tag property.image %></li>
+          <% else %>
+            <li><%= image_tag "missing.jpg" %></li>
+          <% end %>     
           <h3><%= link_to property.title, property_path(property) %></h3>
           <p><%= property.description %></p>
           <p><%= property.property_type.name %></p>
