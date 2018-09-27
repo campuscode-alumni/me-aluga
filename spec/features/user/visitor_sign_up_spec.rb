@@ -19,4 +19,26 @@ feature 'Visitor sign up' do
     expect(user.document).to eq("12345678910")
     expect(user.phone).to eq("1112345678")
   end
+
+  scenario 'Visitor do not insert data in fields' do
+    visit root_path
+    click_on 'Cadastre-se'
+
+    fill_in 'E-mail', with: ''
+    fill_in 'Senha', with: ''
+    fill_in 'Confirme sua senha', with: ''
+    fill_in 'Nome', with: ''
+    fill_in 'Documento', with: ''
+    fill_in 'Telefone', with: ''
+    click_on 'Cadastrar'
+    
+    expect(page).to have_content('Please review the problems below:')
+    expect(page).to have_content('Email can\'t be blank')
+    expect(page).to have_content('Password can\'t be blank')
+    expect(page).to have_content('Name can\'t be blank')
+    expect(page).to have_content('Document can\'t be blank')
+
+
+
+  end
 end
