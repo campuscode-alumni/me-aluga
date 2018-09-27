@@ -18,5 +18,13 @@
       <li class="nav-item">
         <a class="nav-link" href="<%= new_region_path %>">Cadastrar região</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= new_user_registration_path %>">Cadastre-se</a>
+      </li>
+      <% if user_signed_in? %>
+      <li class="nav-item">
+        <p>Olá <%= current_user.email %> </p>
+      </li>
+      <% end %>
   </div>
 </nav>
