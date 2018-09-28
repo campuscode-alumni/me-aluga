@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_27_235112) do
+ActiveRecord::Schema.define(version: 2018_09_28_004734) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -50,7 +50,9 @@ ActiveRecord::Schema.define(version: 2018_09_27_235112) do
     t.decimal "daily_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "proposal_id"
     t.index ["property_type_id"], name: "index_properties_on_property_type_id"
+    t.index ["proposal_id"], name: "index_properties_on_proposal_id"
     t.index ["region_id"], name: "index_properties_on_region_id"
   end
 

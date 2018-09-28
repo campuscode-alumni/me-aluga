@@ -1,0 +1,22 @@
+<h1>Proposta de locação</h1>
+
+<%= simple_form_for @proposal do |f| %>
+
+  <div class="form-group">
+    <%= f.input :start_date, label: 'Início' %>
+  </div>
+  <div class="form-group">
+    <%= f.input :end_date, label: 'Fim' %>
+  </div>
+  <div class="form-group">
+    <%= f.input :total_guests, label: 'Número de hóspedes' %>
+  </div>
+  <div class="form-group">
+    <%= f.input :purpose, label: 'Propósito' %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Enviar', class: 'btn btn-primary' %>
+  </div>
+  
+
+<% end %>

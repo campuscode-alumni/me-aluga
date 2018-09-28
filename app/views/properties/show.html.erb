@@ -21,3 +21,5 @@
   <li>Máximo de diárias: <%= @property.maximum_rent %></li>
   <li>Valor da diária: R$ <%= @property.daily_rate %></li>
 </ul>
+
+<%= link_to 'Enviar proposta', new_property_proposal_path(@property.id), class: 'btn btn-secundary'%>
