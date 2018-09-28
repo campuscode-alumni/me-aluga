@@ -21,10 +21,14 @@
       <li class="nav-item">
         <a class="nav-link" href="<%= new_user_registration_path %>">Cadastre-se</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= aproved_proposal_path %>">Propostas pedentes</a>
+      </li>
       <% if user_signed_in? %>
       <li class="nav-item">
         <p>Olá <%= current_user.email %> </p>
       </li>
       <% end %>
+   
   </div>
 </nav>
