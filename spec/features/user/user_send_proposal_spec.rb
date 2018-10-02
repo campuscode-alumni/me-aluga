@@ -3,7 +3,6 @@ require 'rails_helper'
 feature 'User send proposal' do
 
   scenario 'successfully' do
-
     region = Region.create(name: 'Copacabana')
     property_type = PropertyType.create(name: 'Casa')
 
@@ -14,8 +13,6 @@ feature 'User send proposal' do
                                 maximum_guests: '15', minimum_rent: '2', maximum_rent: '30', daily_rate: '300')
 
     visit root_path
-
-    #Usuário loga
 
     click_on property.title
 
