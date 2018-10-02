@@ -28,7 +28,9 @@ feature 'User send proposal' do
 
     click_on 'Enviar'
 
-    expect(current_path).to eq proposal_path
+    proposal = Proposal.last
+
+    expect(current_path).to eq property_proposal_path(property, proposal)
     expect(page).to have_content("Proposta enviada com sucesso.")
 
     expect(page).to have_css('h1', text: 'Dados do imóvel')
@@ -36,7 +38,7 @@ feature 'User send proposal' do
     expect(page).to have_css('p', text: property.description)
     expect(page).to have_css('p', text: property.property_type.name )
     expect(page).to have_css('p', text: property.room_quantity)
-    expect(page).to have_css('p', text: property.daily_rate)
+    expect(page).to have_css('p', text: 'R$ 300,00')
     
     expect(page).to have_css('h1', text: 'Proposta')
 

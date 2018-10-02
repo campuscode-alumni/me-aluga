@@ -1,12 +1,12 @@
 <h1>Proposta de locação</h1>
 
-<%= simple_form_for @proposal do |f| %>
+<%= simple_form_for([@property, @proposal]) do |f| %>
 
   <div class="form-group">
-    <%= f.input :start_date, label: 'Início' %>
+    <%= f.input :start_date, as: :text, label: 'Início' %>
   </div>
   <div class="form-group">
-    <%= f.input :end_date, label: 'Fim' %>
+    <%= f.input :end_date, as: :text, label: 'Fim' %>
   </div>
   <div class="form-group">
     <%= f.input :total_guests, label: 'Número de hóspedes' %>
