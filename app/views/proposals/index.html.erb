@@ -11,7 +11,7 @@
    <h3>Propósito</h3>
    <p><%= proposal.purpose%></p>
    <h3>Valor total</h3>
-   <p><%= p number_to_currency(proposal.calculate_total_amount, unit: "R$ ", separator: ",", delimiter: "")%></p>
+   <p><%= number_to_currency(proposal.calculate_total_amount, unit: "R$ ", separator: ",", delimiter: "")%></p>
 
 
   </div>
