@@ -3,6 +3,8 @@ require 'rails_helper'
 feature 'User send proposal' do
 
   scenario 'successfully' do
+    user = User.create(email: 'teste@teste.com', password: '12345678',
+                        name: 'Teste do Teste', document: '987654321', phone: '1140028922')
     region = Region.create(name: 'Copacabana')
     property_type = PropertyType.create(name: 'Casa')
 
@@ -13,6 +15,12 @@ feature 'User send proposal' do
                                 maximum_guests: '15', minimum_rent: '2', maximum_rent: '30', daily_rate: '300')
 
     visit root_path
+
+    click_on 'Entrar'
+
+    fill_in 'Email', with: 'teste@teste.com'
+    fill_in 'Senha', with: '12345678'
+    click_on 'Enviar'
 
     click_on property.title
 
