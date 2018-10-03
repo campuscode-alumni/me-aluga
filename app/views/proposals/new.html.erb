@@ -9,10 +9,10 @@
 <%= simple_form_for([@property, @proposal]) do |f| %>
 
   <div class="form-group">
-    <%= f.input :start_date, as: :text, label: 'Início' %>
+    <%= f.input :start_date, html5: true, label: 'Início' %>
   </div>
   <div class="form-group">
-    <%= f.input :end_date, as: :text, label: 'Fim' %>
+    <%= f.input :end_date, html5: true, label: 'Fim' %>
   </div>
   <div class="form-group">
     <%= f.input :total_guests, label: 'Número de hóspedes' %>
