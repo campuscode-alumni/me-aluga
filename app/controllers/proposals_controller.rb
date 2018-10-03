@@ -16,11 +16,14 @@ class ProposalsController < ApplicationController
     @proposal = @property.proposals.new(params.require(:proposal).permit(:start_date, :end_date, :total_amount, 
                                     :total_guests, :purpose))
                                     
-    @proposal.calculate_total_amount
+    @proposal.set_total_amount
    
     if @proposal.save
       flash[:success] = "Proposta enviada com sucesso."
       redirect_to property_proposal_path(@property, @proposal)
+    else
+      flash[:alert] = "Você deve preencher todos os campos da proposta."
+      render :new
     end
 
   end 

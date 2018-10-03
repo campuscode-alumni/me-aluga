@@ -1,5 +1,11 @@
 <h1>Proposta de locação</h1>
 
+<ul>
+  <% @proposal.errors.full_messages.each do |message|%>
+    <li><%= message %></li>
+  <% end %>
+</ul>
+
 <%= simple_form_for([@property, @proposal]) do |f| %>
 
   <div class="form-group">

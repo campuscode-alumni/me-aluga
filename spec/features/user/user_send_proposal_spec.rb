@@ -89,14 +89,15 @@ feature 'User send proposal' do
 
     click_on 'Enviar proposta'
 
-    fill_in 'Início', with: ""
-    fill_in 'Fim', with: ""
+    fill_in 'Início', with: ''
+    fill_in 'Fim', with: ''
     fill_in 'Número de hóspedes', with: ''
-    fill_in 'Propósito', with: 'Para passar as férias com a família'  
+    fill_in 'Propósito', with: ''  
 
     click_on 'Enviar'
+
+    proposal = Proposal.last
     
-    expect(current_path).to eq new_property_proposal_path(property, proposal)
     expect(page).to have_content('Você deve preencher todos os campos da proposta.')
 
   end
