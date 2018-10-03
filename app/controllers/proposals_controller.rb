@@ -1,7 +1,6 @@
 class ProposalsController < ApplicationController
   def index
-    @proposals =  Property.where(realtor: current_realtor)
+    @properties =  Property.where(realtor: current_realtor)
+    @proposals = Proposal.where(property: @properties)
   end
-
-  
 end

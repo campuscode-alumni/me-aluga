@@ -7,12 +7,14 @@ feature 'realtor sees pending proposals' do
 
     region = Region.create(name: 'Copacabana')
     property_type = PropertyType.create(name: 'Apartamento')
-    proposal = Proposal.create(start_date: '10/10/2018', end_date: '17/10/2018', total_amount: 2100.00, total_guests: 5, 
+
+    property = Property.create( title: 'Lindo apartamento 100m da praia', maximum_guests: 15, minimum_rent: 1, maximum_rent: 20, daily_rate: '500',
+      description: 'Um apartamento excelente para férias', property_type: property_type, region: region, area: 30,
+      room_quantity: 2, allow_pets: true, allow_smokers: false, realtor: realtor)
+
+    proposal = Proposal.create(property: property, start_date: '10/10/2018', end_date: '17/10/2018',  total_guests: 5, 
                                 purpose: 'Para passar as férias com a família', user: user)
-    Property.create( title: 'Lindo apartamento 100m da praia', maximum_guests: 15, minimum_rent: 1, maximum_rent: 20, daily_rate: '500.50',
-                      description: 'Um apartamento excelente para férias', property_type: property_type, region: region, area: 30,
-                      room_quantity: 2, allow_pets: true, allow_smokers: false, realtor: realtor)
-    
+   
 
 
                       
@@ -22,6 +24,8 @@ feature 'realtor sees pending proposals' do
     
     fill_in 'E-mail', with: 'corretor@mealuga.com'
     fill_in 'Senha', with: '12345678'
+    
+    click_on 'Entrar'
     
     click_on 'Propostas pendentes'
 
@@ -35,6 +39,6 @@ feature 'realtor sees pending proposals' do
     expect(page).to have_css('h3', text: 'Propósito')
     expect(page).to have_css('p', text: 'Para passar as férias com a família')
     expect(page).to have_css('h3', text: 'Valor total')
-    expect(page).to have_css('p', text: 'R$ 2100,00')
+    expect(page).to have_css('p', text: 'R$ 3500,00')
   end
 end
