@@ -1,6 +1,6 @@
 class ProposalsController < ApplicationController
-  #before_action :authenticate_user!, only: [:show, :new, :create]
-  #before_action :authenticate_realtor!, only: [:index, :show]
+  before_action :authenticate_user!, only: [:show, :new, :create]
+  before_action :authenticate_realtor!, only: [:index, :show]
   def index
     @properties =  Property.where(realtor: current_realtor)
     @proposals = Proposal.where(property: @properties)
