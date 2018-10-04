@@ -1,6 +1,8 @@
 class ProposalsController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :new, :create]
-  before_action :authenticate_realtor!, only: [:index, :show]
+  before_action :authenticate_user!, only: [ :new, :create]
+  before_action :authenticate_realtor!, only: [:index]
+  before_action :authenticate_user_or_realtor!, only: [:show]
+
   def index
     @properties =  Property.where(realtor: current_realtor)
     @proposals = Proposal.where(property: @properties)
@@ -18,7 +20,6 @@ class ProposalsController < ApplicationController
   end
 
   def create
-      if user_signed_in?
               @property = Property.find(params[:property_id])
               
               @proposal = @property.proposals.new(params.require(:proposal).permit(:start_date, :end_date, :total_amount, 
@@ -30,13 +31,15 @@ class ProposalsController < ApplicationController
               flash[:success] = "Proposta enviada com sucesso."
               redirect_to property_proposal_path(@property, @proposal)
             else
-              p @proposal.errors.full_messages
+            
               flash[:alert] = "Você deve preencher todos os campos da proposta."
               render :new
             end
-      else
-           flash[:alert] = "Você deve estar logado"
-      end   
+  
   end
 
+  def authenticate_user_or_realtor!
+    if user_signed_in? || realtor_signed_in?
+    end
+  end
 end
