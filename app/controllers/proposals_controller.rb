@@ -14,7 +14,7 @@ class ProposalsController < ApplicationController
   def create
     @property = Property.find(params[:property_id])
     @proposal = @property.proposals.new(params.require(:proposal).permit(:start_date, :end_date, :total_amount, 
-                                    :total_guests, :purpose))
+                                                                          :total_guests, :purpose))
                                     
     @proposal.set_total_amount
    
@@ -27,5 +27,10 @@ class ProposalsController < ApplicationController
     end
 
   end 
+
+  def accepted
+    @proposal = Proposal.find(params[:proposal_id])    
+
+  end
   
 end

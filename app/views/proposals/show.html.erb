@@ -24,3 +24,5 @@
 
 <h3>Valor total</h3>
 <p><%= number_to_currency(@proposal.total_amount, unit: "R$ ", separator: ",", delimiter: "") %></p>
+
+<%= link_to 'Aceitar', property_proposal_accepted_path(@property.id, @proposal.id), method: :post, class: 'btn btn-success' %>
