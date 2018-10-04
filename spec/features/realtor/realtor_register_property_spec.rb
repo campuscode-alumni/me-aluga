@@ -14,7 +14,7 @@ feature 'Realtor register Property' do
     fill_in 'E-mail', with: 'corretor@mealuga.com'
     fill_in 'Senha', with: '12345678'
     
-    click_on 'Entrar'
+    click_on 'Entrar como corretor'
 
     click_on 'Cadastrar imóvel'
     fill_in 'Título', with: 'Lindo apartamento 100m da praia'
@@ -65,7 +65,7 @@ feature 'Realtor register Property' do
     fill_in 'E-mail', with: 'corretor@mealuga.com'
     fill_in 'Senha', with: '12345678'
     
-    click_on 'Entrar'
+    click_on 'Entrar como corretor'
 
     click_on 'Cadastrar imóvel'
     click_on 'Cadastrar'
@@ -92,7 +92,7 @@ feature 'Realtor register Property' do
     fill_in 'E-mail', with: 'corretor@mealuga.com'
     fill_in 'Senha', with: '12345678'
     
-    click_on 'Entrar'
+    click_on 'Entrar como corretor'
 
     click_on 'Cadastrar imóvel'
     fill_in 'Título', with: 'Lindo apartamento 100m da praia'

@@ -14,18 +14,15 @@ feature 'realtor sees pending proposals' do
 
     proposal = Proposal.create(property: property, start_date: '10/10/2018', end_date: '17/10/2018',  total_guests: 5, 
                                 purpose: 'Para passar as férias com a família', user: user)
-   
-
-
                       
     visit root_path
-      
+
     click_on 'Acesso Corretor'
     
     fill_in 'E-mail', with: 'corretor@mealuga.com'
     fill_in 'Senha', with: '12345678'
     
-    click_on 'Entrar'
+    click_on 'Entrar como corretor'
     
     click_on 'Propostas pendentes'
 

@@ -1,0 +1,28 @@
+<h1>Proposta de locação</h1>
+
+<ul>
+  <% @proposal.errors.full_messages.each do |message|%>
+    <li><%= message %></li>
+  <% end %>
+</ul>
+
+<%= simple_form_for([@property, @proposal]) do |f| %>
+
+  <div class="form-group">
+    <%= f.input :start_date, html5: true, label: 'Início' %>
+  </div>
+  <div class="form-group">
+    <%= f.input :end_date, html5: true, label: 'Fim' %>
+  </div>
+  <div class="form-group">
+    <%= f.input :total_guests, label: 'Número de hóspedes' %>
+  </div>
+  <div class="form-group">
+    <%= f.input :purpose, label: 'Propósito' %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Enviar', class: 'btn btn-primary' %>
+  </div>
+  
+
+<% end %>
