@@ -39,7 +39,6 @@ class ProposalsController < ApplicationController
   end
 
   def authenticate_user_or_realtor!
-    if user_signed_in? || realtor_signed_in?
-    end
+    user_signed_in? || realtor_signed_in?
   end
 end
