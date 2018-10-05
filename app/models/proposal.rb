@@ -3,9 +3,13 @@ class Proposal < ApplicationRecord
   validates :start_date, :end_date, :total_guests, :purpose, 
               presence: { message: 'Você deve preencher todos os campos da proposta.' }
 
+  enum status: [:pending, :accepted, :refused]
+  
   def set_total_amount
     calculate_total_amount
   end
+
+  
 
   private
   
