@@ -2,10 +2,20 @@ require 'rails_helper'
 
 feature 'Realtor register Property' do
   scenario 'successfully' do
+    realtor = Realtor.create(email: 'corretor@mealuga.com', password: '12345678')
+
     region = Region.create(name: 'Copacabana')
     property_type = PropertyType.create(name: 'Apartamento')
 
     visit root_path
+
+    click_on 'Acesso Corretor'
+    
+    fill_in 'E-mail', with: 'corretor@mealuga.com'
+    fill_in 'Senha', with: '12345678'
+    
+    click_on 'Entrar como corretor'
+
     click_on 'Cadastrar imóvel'
     fill_in 'Título', with: 'Lindo apartamento 100m da praia'
     fill_in 'Descrição', with: 'Um apartamento excelente para férias'
@@ -24,7 +34,6 @@ feature 'Realtor register Property' do
     attach_file('Enviar foto', Rails.root.join('spec', 'support', 'fixtures', 'imovel.jpg'))
     click_on 'Cadastrar'
 
-    
     expect(page).to have_css('p', text: 'Imóvel cadastrado com sucesso')
     expect(page).to have_css('h1', text: 'Lindo apartamento 100m da praia')
     expect(page).to have_css('p', text: 'Um apartamento excelente para férias')
@@ -44,10 +53,20 @@ feature 'Realtor register Property' do
   end
 
   scenario 'and leave blank fields' do
+    realtor = Realtor.create(email: 'corretor@mealuga.com', password: '12345678')
+
     Region.create(name: 'Copacabana')
     PropertyType.create(name: 'Apartamento')
 
     visit root_path
+    
+    click_on 'Acesso Corretor'
+    
+    fill_in 'E-mail', with: 'corretor@mealuga.com'
+    fill_in 'Senha', with: '12345678'
+    
+    click_on 'Entrar como corretor'
+
     click_on 'Cadastrar imóvel'
     click_on 'Cadastrar'
 
@@ -61,10 +80,20 @@ feature 'Realtor register Property' do
   end
 
   scenario 'send empty photo' do
+
+    realtor = Realtor.create(email: 'corretor@mealuga.com', password: '12345678')
+
     region = Region.create(name: 'Copacabana')
     property_type = PropertyType.create(name: 'Apartamento')
 
     visit root_path
+    click_on 'Acesso Corretor'
+    
+    fill_in 'E-mail', with: 'corretor@mealuga.com'
+    fill_in 'Senha', with: '12345678'
+    
+    click_on 'Entrar como corretor'
+
     click_on 'Cadastrar imóvel'
     fill_in 'Título', with: 'Lindo apartamento 100m da praia'
     fill_in 'Descrição', with: 'Um apartamento excelente para férias'

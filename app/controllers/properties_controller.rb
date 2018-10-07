@@ -5,6 +5,7 @@ class PropertiesController < ApplicationController
 
   def index
     @regions = Region.all
+    
 
     #@property = Property.find()
   end 
@@ -15,14 +16,17 @@ class PropertiesController < ApplicationController
 
   def create
     @property = Property.new(property_params)
- 
-    if @property.save
-      flash[:success] = 'Imóvel cadastrado com sucesso'
-      redirect_to @property
-    else
-      flash[:alert] = 'Você deve preencher todos os campos'
-      render :new
+    if realtor_signed_in?
+      @property.realtor = current_realtor
+      if @property.save 
+        flash[:success] = 'Imóvel cadastrado com sucesso'
+        redirect_to @property
+      else
+        flash[:alert] = 'Você deve preencher todos os campos'
+        render :new
+      end
     end
+      
   end
 
   private

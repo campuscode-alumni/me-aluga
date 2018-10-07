@@ -1,0 +1,20 @@
+
+<%= @proposals.each do |proposal| %>
+  <div>
+   <h1>Proposta</h1>
+
+   <h2><%= link_to proposal.user.name, property_proposal_path(proposal.property_id, proposal)%></h2>
+   <h3>Início</h3>
+   <p><%= proposal.start_date.strftime("%d/%m/%Y") %></p>
+   <h3>Fim</h3>
+   <p><%= proposal.end_date.strftime("%d/%m/%Y") %></p>
+   <h3>Hóspedes</h3>
+   <p><%= proposal.total_guests%></p>
+   <h3>Propósito</h3>
+   <p><%= proposal.purpose%></p>
+   <h3>Valor total</h3>
+   <p><%= number_to_currency(proposal.set_total_amount, unit: "R$ ", separator: ",", delimiter: "")%></p>
+
+
+  </div>
+<% end %>
