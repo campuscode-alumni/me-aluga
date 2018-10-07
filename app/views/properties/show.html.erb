@@ -22,4 +22,11 @@
   <li>Valor da diária: R$ <%= @property.daily_rate %></li>
 </ul>
 
-<%= link_to 'Enviar proposta', new_property_proposal_path(@property.id), class: 'btn btn-secundary'%>
+<% if @any_proposal_pending %>
+  <p>Você enviou uma proposta para este imóvel no dia <%= @proposal_pending_user.created_at.strftime('%d/%m/%Y')%>
+  <p>Para visualizar sua proposta enviada, <%= link_to 'clique aqui', property_proposal_path(@property, @proposal_pending_user) %></p>
+<% else %>
+  <% if user_signed_in? %>
+    <%= link_to 'Enviar proposta', new_property_proposal_path(@property.id), class: 'btn btn-secundary'%>
+  <% end %>
+<% end %>

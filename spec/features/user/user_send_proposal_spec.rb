@@ -102,7 +102,7 @@ feature 'User send proposal' do
 
   end
 
-  scenario 'and can''t send a new proposal for the same property' do
+  scenario "and can't send a new proposal for the same property" do
 
     user = User.create(email: 'user@dominio.com.br', password: '12345678',
                        name: 'Teste da Silva', document: '987654321', phone: '1140028922')
@@ -117,8 +117,8 @@ feature 'User send proposal' do
                               maximum_guests: '15', minimum_rent: '2', maximum_rent: '30', daily_rate: '300')
     
     proposal = property.proposals.create(start_date: '10/10/2018', end_date: '17/10/2018', 
-                             total_guests: 10, purpose: 'Férias da família'
-                             )#, user: user)
+                             total_guests: 10, purpose: 'Férias da família', 
+                             user: user)
 
     visit root_path  
     
@@ -152,8 +152,8 @@ feature 'User send proposal' do
                               maximum_guests: '15', minimum_rent: '2', maximum_rent: '30', daily_rate: '300')
     
     proposal = property.proposals.create(start_date: '10/10/2018', end_date: '17/10/2018', 
-                             total_guests: 10, purpose: 'Férias da família'
-                             )#, user: user)
+                             total_guests: 10, purpose: 'Férias da família', 
+                             user: user)
 
     visit root_path  
     
