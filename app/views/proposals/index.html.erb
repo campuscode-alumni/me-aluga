@@ -1,8 +1,10 @@
 
+<p><%= flash[:alert]%></p>
+
+
 <%= @proposals.each do |proposal| %>
   <div>
    <h1>Proposta</h1>
-
    <h2><%= link_to proposal.user.name, property_proposal_path(proposal.property_id, proposal)%></h2>
    <h3>Início</h3>
    <p><%= proposal.start_date.strftime("%d/%m/%Y") %></p>

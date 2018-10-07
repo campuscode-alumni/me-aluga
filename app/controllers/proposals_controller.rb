@@ -10,7 +10,13 @@ class ProposalsController < ApplicationController
   end
 
   def show
-    @proposal = Proposal.find(params[:id])
+    property = Property.find(params[:property_id])
+    if property.realtor == current_realtor || current_user  == Proposal.find(params[:id]).user
+     @proposal = Proposal.find(params[:id])
+    else
+      flash[:alert] = "Erro"
+      redirect_to root_path
+    end
   end
 
   def new

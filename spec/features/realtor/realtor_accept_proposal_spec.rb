@@ -37,10 +37,8 @@ feature 'Realtor accept proposal' do
 
     expect(page).to have_content('Proposta aceita com sucesso.')
     expect(page).not_to have_link('Aceitar')
-    #expect(proposal.status).to eq :accepted
     within '#status' do     
       expect(page).to have_css('p', text: 'Proposta aceita.')
-      #expect(page).to have_css('p', text: 'Hora de Atualuzação')
       expect(page).to have_content(proposal.updated_at.strftime('Atualizado em %d/%m/%Y às %H:%M'))
     end
 

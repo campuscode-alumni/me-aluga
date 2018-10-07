@@ -38,4 +38,33 @@ feature 'realtor sees pending proposals' do
     expect(page).to have_css('h3', text: 'Valor total')
     expect(page).to have_css('p', text: 'R$ 3500,00')
   end
+
+  scenario 'realtor only view your proposals' do
+    user = User.create(name: 'Exemplo da Silva', email: 'exemplo@gmail.com', password: '12345678', document: '12345678910', phone: '1112345678')
+    realtor_owner = Realtor.create(email: 'corretor@mealuga.com', password: '12345678')
+    another_realtor = Realtor.create(email: 'another_realtor@mealuga.com', password: '12345678')
+    region = Region.create(name: 'Copacabana')
+    property_type = PropertyType.create(name: 'Apartamento')
+
+    property = Property.create( title: 'Lindo apartamento 100m da praia', maximum_guests: 15, minimum_rent: 1, maximum_rent: 20, daily_rate: '500',
+      description: 'Um apartamento excelente para férias', property_type: property_type, region: region, area: 30,
+      room_quantity: 2, allow_pets: true, allow_smokers: false, realtor: realtor_owner)
+
+    proposal = Proposal.create(property: property, start_date: '10/10/2018', end_date: '17/10/2018',  total_guests: 5, 
+                                purpose: 'Para passar as férias com a família', user: user)
+                      
+    visit root_path
+
+    click_on 'Acesso Corretor'
+    
+    fill_in 'E-mail', with: 'another_realtor@mealuga.com'
+    fill_in 'Senha', with: '12345678'
+    
+    click_on 'Entrar como corretor'
+    
+    
+    visit property_proposal_path(property, proposal)
+    expect(current_path).to eq root_path
+    expect(page).to have_css('p', text: 'Erro')
+  end
 end
