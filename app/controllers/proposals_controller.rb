@@ -46,10 +46,17 @@ class ProposalsController < ApplicationController
     @proposal = Proposal.find(params[:proposal_id])
     @proposal.accepted!
     flash[:success] = 'Proposta aceita com sucesso.'
-    redirect_to property_proposal_path(@property, @proposal)   
-
+    redirect_to property_proposal_path(@property, @proposal)
   end
   
+  def rejected
+    @property = Property.find(params[:property_id])
+    @proposal = Proposal.find(params[:proposal_id])
+    @proposal.refused!
+    flash[:success] = 'Proposta rejeitada com sucesso.'
+    redirect_to property_proposal_path(@property, @proposal)
+  end
+
   def set_property
     @property = Property.find(params[:property_id])
   end

@@ -27,12 +27,16 @@
 
 <% if @proposal.pending? %>
   <%= link_to 'Aceitar', property_proposal_accepted_path(@property.id, @proposal.id), method: :post, class: 'btn btn-success' %>
+  <%= link_to 'Rejeitar', property_proposal_rejected_path(@property.id, @proposal.id), method: :post, class: 'btn btn-success' %>
 <% end %>
 
 <div id=status>
   <h3>Status da proposta</h3>
   <% if @proposal.accepted? %>
     <p>Proposta aceita.</p>
-    <p><%= @proposal.updated_at.strftime('Atualizado em %d/%m/%Y às %H:%M:%S') %></p>
+    <p><%= @proposal.updated_at.strftime('Atualizado em %d/%m/%Y às %H:%M') %></p>
+  <% elsif @proposal.refused? %>
+    <p>Proposta rejeitada.</p>
+    <p><%= @proposal.updated_at.strftime('Atualizado em %d/%m/%Y às %H:%M') %></p>
   <% end %>
 </div>
