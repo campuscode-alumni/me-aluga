@@ -1,7 +1,11 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: [:show]
 
-  def show; end
+  def show 
+    @proposal_pending_user = @property.proposals.where(user: current_user, status: :pending).first
+    
+    @any_proposal_pending = !@proposal_pending_user.nil?
+  end
 
   def index
     @regions = Region.all

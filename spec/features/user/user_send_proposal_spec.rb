@@ -104,4 +104,72 @@ feature 'User send proposal' do
 
   end
 
+  scenario "and can't send a new proposal for the same property" do
+    realtor = Realtor.create(email: 'corretor@mealuga.com', password: '12345678')
+    user = User.create(email: 'user@dominio.com.br', password: '12345678',
+                       name: 'Teste da Silva', document: '987654321', phone: '1140028922')
+    
+    region = Region.create(name: 'Copacabana')
+    property_type = PropertyType.create(name: 'Casa')
+                   
+    property = Property.create(title: 'CASA - COPACABANA-RJ PISCINA/WI-FI/PROX.PRAIA',
+                              description: 'casa com ar cond./cozinha conjugada com sala, cama de casal,beliche e banheiro',
+                              property_type: property_type, region: region, area: '120 m²', 
+                              room_quantity: '3', accessibility: true, allow_pets: true, allow_smokers: false,
+                              maximum_guests: '15', minimum_rent: '2', maximum_rent: '30', daily_rate: '300', realtor: realtor)
+    
+    proposal = property.proposals.create(start_date: '10/10/2018', end_date: '17/10/2018', 
+                             total_guests: 10, purpose: 'Férias da família', 
+                             user: user)
+
+    visit root_path  
+    
+    click_on 'Entrar'
+
+    fill_in 'Email', with: 'user@dominio.com.br'
+    fill_in 'Senha', with: '12345678'
+
+    click_on 'Enviar'
+
+    click_on property.title
+
+    expect(page).to have_content("Você enviou uma proposta para este imóvel no dia #{proposal.created_at.strftime('%d/%m/%Y')}")
+    expect(page).to have_content("Para visualizar sua proposta enviada, clique aqui")
+    expect(page).not_to have_css("a", text: "Enviar proposta") 
+    
+  end
+
+  scenario 'and can access the proposal details in the page of property' do
+    realtor = Realtor.create(email: 'corretor@mealuga.com', password: '12345678')
+    user = User.create(email: 'user@dominio.com.br', password: '12345678',
+                       name: 'Teste da Silva', document: '987654321', phone: '1140028922')
+    
+    region = Region.create(name: 'Copacabana')
+    property_type = PropertyType.create(name: 'Casa')
+                   
+    property = Property.create(title: 'CASA - COPACABANA-RJ PISCINA/WI-FI/PROX.PRAIA',
+                              description: 'casa com ar cond./cozinha conjugada com sala, cama de casal,beliche e banheiro',
+                              property_type: property_type, region: region, area: '120 m²', 
+                              room_quantity: '3', accessibility: true, allow_pets: true, allow_smokers: false,
+                              maximum_guests: '15', minimum_rent: '2', maximum_rent: '30', daily_rate: '300', realtor: realtor)
+    
+    proposal = property.proposals.create(start_date: '10/10/2018', end_date: '17/10/2018', 
+                             total_guests: 10, purpose: 'Férias da família', 
+                             user: user)
+
+    visit root_path  
+    
+    click_on 'Entrar'
+
+    fill_in 'Email', with: 'user@dominio.com.br'
+    fill_in 'Senha', with: '12345678'
+
+    click_on 'Enviar'
+
+    click_on property.title
+
+    click_on 'clique aqui'
+
+    expect(current_path).to eq property_proposal_path(property, proposal)      
+  end
 end 

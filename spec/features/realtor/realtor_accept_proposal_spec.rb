@@ -3,8 +3,10 @@ require 'rails_helper'
 feature 'Realtor accept proposal' do
 
   scenario 'Successfully' do 
+
     user = User.create(name: 'Exemplo da Silva', email: 'exemplo@gmail.com', password: '12345678', document: '12345678910', phone: '1112345678')
     realtor = Realtor.create(email: 'corretor@mealuga.com', password: '12345678')
+
     region = Region.create(name: 'Copacabana')
     property_type = PropertyType.create(name: 'Casa')
 
@@ -43,7 +45,7 @@ feature 'Realtor accept proposal' do
     end
 
 
-    
+   
   end
 
 end

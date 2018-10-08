@@ -25,9 +25,8 @@ class ProposalsController < ApplicationController
 
   def create
     @proposal = @property.proposals.new(params.require(:proposal).permit(:start_date, :end_date, :total_amount, 
-                                    :total_guests, :purpose))
-    @proposal.user = current_user                                                                
-
+                                                                          :total_guests, :purpose))
+    @proposal.user = current_user
     @proposal.set_total_amount
 
     if @proposal.save
