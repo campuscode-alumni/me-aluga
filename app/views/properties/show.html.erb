@@ -22,6 +22,15 @@
   <li>Valor da diária: R$ <%= @property.daily_rate %></li>
 </ul>
 
+<h3>Preços por temporada</h3>
+<% @property.price_ranges.each do |price_range| %>
+  <div class='temporada'>
+    <p><%= price_range.description %></p>
+    <p><%= price_range.period_formated %></p>
+    <p><%= number_to_currency(price_range.daily_rate, unit: "R$ ", separator: ",", delimiter: "") %></p>
+  </div>
+<% end %>
+
 <% if @any_proposal_pending %>
   <p>Você enviou uma proposta para este imóvel no dia <%= @proposal_pending_user.created_at.strftime('%d/%m/%Y')%>
   <p>Para visualizar sua proposta enviada, <%= link_to 'clique aqui', property_proposal_path(@property, @proposal_pending_user) %></p>
@@ -30,3 +39,5 @@
     <%= link_to 'Enviar proposta', new_property_proposal_path(@property.id), class: 'btn btn-secundary'%>
   <% end %>
 <% end %>
+
+<%= link_to 'Cadastrar preço por temporada', new_property_price_range_path(@property.id), class: 'btn btn-secundary btn-sm' %>

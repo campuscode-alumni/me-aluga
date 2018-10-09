@@ -1,0 +1,24 @@
+<h1>Criar Preço por Temporada</h1>
+
+<%= simple_form_for([@property, @price_range]) do |f| %>
+
+  <div class='form-group'>
+    <%= f.input :description, label: 'Descrição' %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.input :start_date, html5: true, label: 'Início' %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.input :end_date, html5: true, label: 'Final' %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.input :daily_rate, label: 'Diária' %>
+  </div>
+
+  <div class='form-group'>
+    <%= f.submit 'Enviar', class: 'btn btn-secondary' %>
+  </div>
+<% end %>

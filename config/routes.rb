@@ -6,9 +6,10 @@ Rails.application.routes.draw do
     resources :proposals, only: [:show, :new, :create] do
       post 'accepted'
     end
+
+    resources :price_ranges, only: [:new, :create]
   end
   resources :property_types, only: [:show, :new, :create]
   resources :regions, only: [:show, :new, :create]  
   resources :proposals, only: [:index] 
-  
 end
