@@ -11,6 +11,8 @@ class PriceRangesController < ApplicationController
     if @price_range.save
       flash[:success] = 'Temporada cadastrada com sucesso.'
       redirect_to @property
+    else
+      render 'new'
     end
   end
 

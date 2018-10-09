@@ -1,5 +1,11 @@
 <h1>Criar Preço por Temporada</h1>
 
+<ul>
+  <% @price_range.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+</ul>
+
 <%= simple_form_for([@property, @price_range]) do |f| %>
 
   <div class='form-group'>

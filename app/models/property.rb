@@ -9,8 +9,4 @@ class Property < ApplicationRecord
   validates :title, :room_quantity, :maximum_guests, :minimum_rent,
             :maximum_rent, :daily_rate,
             presence: { message: 'não pode ficar em branco' }
-
-  def edit_date
-    
-  end 
-end
+ end
