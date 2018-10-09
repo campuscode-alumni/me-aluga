@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :realtors
   devise_for :users
   root to: 'properties#index'
-  resources :properties, only: [:show, :new, :create] do
+  resources :properties, only: [:show, :new, :create, :index] do
     resources :proposals, only: [:show, :new, :create] do
         post 'accepted'
         post 'rejected'
@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   resources :property_types, only: [:show, :new, :create]
   resources :regions, only: [:show, :new, :create]  
   resources :proposals, only: [:index] 
+  
   
 end

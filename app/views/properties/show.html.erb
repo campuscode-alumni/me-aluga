@@ -20,7 +20,10 @@
   <li>Mínimo de diárias: <%= @property.minimum_rent %></li>
   <li>Máximo de diárias: <%= @property.maximum_rent %></li>
   <li>Valor da diária: R$ <%= @property.daily_rate %></li>
-</ul>
+</ul> 
+<% if realtor_signed_in? %>
+  <%= link_to 'Bloquear temporada' %>
+<% end %>
 
 <% if @any_proposal_pending %>
   <p>Você enviou uma proposta para este imóvel no dia <%= @proposal_pending_user.created_at.strftime('%d/%m/%Y')%>
