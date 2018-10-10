@@ -24,9 +24,27 @@ class Proposal < ApplicationRecord
       self.total_amount = 0
     elsif end_date < start_date
       self.total_amount = 0
-    else    
-      self.total_amount = property.daily_rate * (end_date - start_date).to_i
+    else 
+      self.total_amount = total_amount_by_day
     end
+  end
+
+  def total_amount_by_day
+    total_price = 0
+
+    (start_date .. (end_date - 1)).each do |day|
+      price_range = property.price_ranges.where("start_date <= :date and end_date >= :date", date: day).maximum('daily_rate')
+      
+      if price_range.nil?
+        total_price += property.daily_rate
+      else
+        total_price += price_range
+       
+      end
+    end 
+    
+    total_price
+    
   end
 
 end

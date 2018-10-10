@@ -172,4 +172,88 @@ feature 'User send proposal' do
 
     expect(current_path).to eq property_proposal_path(property, proposal)      
   end
+
+  scenario 'During the season that price range is registered' do
+
+    realtor = Realtor.create(email: 'corretor@mealuga.com', password: '12345678')
+    user = User.create(email: 'user@dominio.com.br', password: '12345678',
+                       name: 'Teste da Silva', document: '987654321', phone: '1140028922')
+    
+    region = Region.create(name: 'Copacabana')
+    property_type = PropertyType.create(name: 'Casa')
+                   
+    property = Property.create(title: 'CASA - COPACABANA-RJ PISCINA/WI-FI/PROX.PRAIA',
+                              description: 'casa com ar cond./cozinha conjugada com sala, cama de casal,beliche e banheiro',
+                              property_type: property_type, region: region, area: '120 m²', 
+                              room_quantity: '3', accessibility: true, allow_pets: true, allow_smokers: false,
+                              maximum_guests: '15', minimum_rent: '2', maximum_rent: '30', daily_rate: '300', realtor: realtor)
+
+    price_range = property.price_ranges.create(description: 'Natal', start_date: '25/12/2018', end_date: '01/01/2019', daily_rate: '500')
+
+    visit root_path
+    
+    click_on 'Entrar'
+
+    fill_in 'Email', with: 'user@dominio.com.br'
+    fill_in 'Senha', with: '12345678'
+
+    click_on 'Enviar'
+
+    click_on property.title
+
+    click_on 'Enviar proposta'
+
+    fill_in 'Início', with: "25/12/2018"
+    fill_in 'Fim', with: "27/12/2018"
+    fill_in 'Número de hóspedes', with: '5'
+    fill_in 'Propósito', with: 'Para passar as férias com a família'  
+
+    click_on 'Enviar'
+
+    expect(page).to have_css('h3', text: 'Valor total')
+    expect(page).to have_css('p', text: 'R$ 1000,00')
+                              
+  end
+
+  scenario 'and daily rate is calculated daily' do
+
+    realtor = Realtor.create!(email: 'corretor@mealuga.com', password: '12345678')
+    user = User.create!(email: 'user@dominio.com.br', password: '12345678',
+                       name: 'Teste da Silva', document: '987654321', phone: '1140028922')
+    
+    region = Region.create!(name: 'Copacabana')
+    property_type = PropertyType.create!(name: 'Casa')
+                   
+    property = Property.create!(title: 'CASA - COPACABANA-RJ PISCINA/WI-FI/PROX.PRAIA',
+                              description: 'casa com ar cond./cozinha conjugada com sala, cama de casal,beliche e banheiro',
+                              property_type: property_type, region: region, area: '120 m²', 
+                              room_quantity: '3', accessibility: true, allow_pets: true, allow_smokers: false,
+                              maximum_guests: '15', minimum_rent: '2', maximum_rent: '30', daily_rate: '300', realtor: realtor)
+
+    price_range = property.price_ranges.create!(description: 'Natal', start_date: '25/12/2018', end_date: '26/12/2018', daily_rate: '500')
+
+    visit root_path
+    
+    click_on 'Entrar'
+
+    fill_in 'Email', with: 'user@dominio.com.br'
+    fill_in 'Senha', with: '12345678'
+
+    click_on 'Enviar'
+
+    click_on property.title
+
+    click_on 'Enviar proposta'
+
+    fill_in 'Início', with: "20/12/2018"
+    fill_in 'Fim', with: "30/12/2018"
+    fill_in 'Número de hóspedes', with: '5'
+    fill_in 'Propósito', with: 'Para passar as férias com a família'  
+
+    click_on 'Enviar'
+
+    expect(page).to have_css('h3', text: 'Valor total')
+    expect(page).to have_css('p', text: 'R$ 3400,00')
+
+  end
 end 
