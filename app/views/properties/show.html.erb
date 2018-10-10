@@ -22,7 +22,7 @@
   <li>Valor da diária: R$ <%= @property.daily_rate %></li>
 </ul> 
 <% if realtor_signed_in? %>
-  <%= link_to 'Bloquear temporada' %>
+  <%= link_to 'Bloquear temporada',  new_property_unavailable_range_path(@property) %>
 <% end %>
 
 <% if @any_proposal_pending %>

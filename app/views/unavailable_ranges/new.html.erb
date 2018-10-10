@@ -1,0 +1,12 @@
+<h1>Bloquear temporada</h1>
+
+<%= simple_form_for([@property, @unavailable_range]) do |f| %>
+  <div class="form-group">
+    <%= f.input :description, label: 'Descrição' %>
+  </div>
+    <div class="form-group">
+    <%= f.input :start_date, html5: true, label: 'Data inicial' %>
+    <%= f.input :end_date, html5: true, label: 'Data final' %>
+  </div>
+  <%= f.submit 'Bloquear', class: 'btn btn-primary' %>
+<% end %>

@@ -29,8 +29,10 @@ feature 'Realtor block proporty by season' do
     fill_in 'Descrição', with: 'Férias do dono da casa'
     fill_in 'Data inicial', with: '08/10/2018'
     fill_in 'Data final', with: '15/10/2018'
+    
+    click_on 'Bloquear'
 
-    expext(page).to have_css('p', text: 'Imóvel bloqueado no peíodo de 08/10/2018 a 15/10/2018')
+    expect(page).to have_css('p', text: 'Imóvel bloqueado no peíodo de 08/10/2018 a 15/10/2018')
     
   end
 end
